@@ -1,8 +1,9 @@
 <html ng-app>
 <body>
-  <form ng-controller="StartUpController">
-    Starting: <input ng-model="funding.startingEstimate">
-    Recommendation: {{funding.needed}}
+  <form ng-submit="requestFunding()" ng-controller="StartUpController">
+    Starting: <input ng-change="computeNeeded()" ng-model="startingEstimate">
+    Recommendation: {{needed}}
+    <button>Fund my startup!</button>
   </form>
 
   <script
@@ -11,13 +12,13 @@
 
   <script>
     function StartUpController($scope) {
-      $scope.funding = { startingEstimate: 0 };
-
-      computeNeeded = function() {
-        $scope.funding.needed = $scope.funding.startingEstimate * 10;
+      $scope.computeNeeded = function() {
+        $scope.needed = $scope.startingEstimate * 10;
       };
 
-      $scope.$watch('funding.startingEstimate', computeNeeded);
+      $scope.requestFunding = function() {
+        window.alert("Sorry, please get more customers first.");
+      };
     }
   </script>
 </body>
