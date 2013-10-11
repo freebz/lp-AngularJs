@@ -1,0 +1,41 @@
+<html ng-app>
+<body>
+
+  <style type="text/css">
+    .menu-disabled-true {
+	color: gray;
+    }
+  </style>
+
+  <div ng-controller='DeathrayMenuController'>
+    <button ng-click='toggleMenu()'>Toggle Menu</button>
+    <ul>
+      <li class='menu-disabled-{{isDisaled}}' ng-click='stun()'>Stun</li>
+      <li ng-click='disintegrate()'>Disintegrate</li>
+      <li ng-click='erase()'>Erase from history</li>
+    </ul>
+  </div>
+  
+  <script
+     src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js">
+  </script>
+
+  <script type="text/javascript">
+    
+    function DeathrayMenuController($scope) {
+	$scope.isDisabled = false;
+
+	$scope.toggleMenu = function() {
+	    $scope.menuState.show = !$scope.menuState.show;
+	};
+
+	// death ray functions left as exercise to reader
+	$scope.stun = function() {
+	    $scope.isDisabled = 'true';
+	};
+    }
+
+  </script>
+    
+</body>
+</html>
