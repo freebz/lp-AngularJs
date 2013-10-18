@@ -1,0 +1,30 @@
+<html ng-app>
+  <head>
+    <script src="angular.js"></script>
+    <script type="text/javascript">
+      function AddUserController($scope) {
+	  $scope.message = '';
+	  
+	  $scope.addUser = function() {
+	      // TODO for the reader: actually save user to database...
+	      $scope.message = 'Thanks, ' + $scope.user.first + ', we added you!';
+	  };
+      }
+    </script>
+  </head>
+  <body ng-controller="AddUserController">
+    <h1>Sign Up</h1>
+    <form name='addUserForm' ng-controller="AddUserController">
+      <div ng-show='message'>{{message}}</div>
+      <div>First name: <input ng-model='user.first' required></div>
+      <div>Last name: <input ng-model='user.last' required></div>
+      <div>Email: <input type='email' ng-model='user.email' required></div>
+      <div>Age: <input type='number'
+		       ng-model='user.age'
+		       ng-maxlength='3'
+		       ng-minlength='1'></div>
+      <div><button ng-click='addUser()'
+		   ng-disabled='!addUserForm.$valid'>Submit</button></div>
+    </form>
+  </body>
+</html>
