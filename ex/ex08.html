@@ -1,0 +1,15 @@
+<html>
+<head>
+  <script
+     src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js">
+  </script>
+  <script src="app05.js"></script>
+</head>
+<body ng-app="app" ng-controller="MainCtrl">
+  <ul>
+    <li ng-repeat="person in developers | orderBy:'name'">
+      {{person.name}} from {{person.country}}
+    </li>
+  </ul>
+</body>
+</html>

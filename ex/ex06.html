@@ -1,0 +1,13 @@
+<html>
+<head>
+  <script
+     src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js">
+  </script>
+  <script src="focus.js"></script>
+</head>
+<body ng-app='app'>
+  <span>Insert your name:</span>
+  <input type="text" focus ng-model="user.name" />
+  <h3>Echo: {{user.name}}</h3>
+</body>
+</html>
