@@ -1,0 +1,22 @@
+<html ng-app='app'>
+<body>
+  <hello>Bob</hello>
+
+  <script
+     src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js">
+  </script>
+
+  <script type="text/javascript">
+    
+    angular.module('app', [])
+    .directive('hello', function(){
+	return {
+	    restrict: 'E',
+	    template: '<div>Hi there <span ng-transclude></span></div>',
+	    transclude: true,
+	    replace: true
+	}
+    });
+
+  </script>
+</html>

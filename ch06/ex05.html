@@ -1,0 +1,96 @@
+<html ng-app='expanderModule'>
+<body>
+  <div ng-controller='SomeController'>
+    <accordion>
+      <expander class='expander'
+		ng-repeat='expander in expanders'
+		expander-title='expander.title'>
+	{{expander.text}}
+      </expander>
+    </accordion>
+  </div>
+
+  <style type="text/css">
+    .expander {
+	border: 1px solid black;
+	width: 250px;
+    }
+
+    .expander > .title {
+	background-color: black;
+	color: white;
+	padding: .1em .3em;
+	cursor: pointer;
+    }
+    .expander > .body {
+	padding: .1em .3em;
+    }
+  </style>
+
+  <script
+     src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js">
+  </script>
+
+  <script type="text/javascript">
+    
+    var appModule = angular.module('expanderModule', []);
+
+    appModule.directive('accordion', function() {
+	return {
+	    restrict: 'EA',
+	    replace: true,
+	    transclude: true,
+	    template: '<div ng-transclude></div>',
+	    controller: function() {
+		var expanders = [];
+		this.gotOpened = function(selectedExpander) {
+		    angular.forEach(expanders, function(expander) {
+			if (selectedExpander != expander) {
+			    expander.showMe = false;
+			}
+		    });
+		}
+
+		this.addExpander = function(expander) {
+		    expanders.push(expander);
+		}
+	    }
+	}
+    });
+    
+    appModule.directive('expander', function(){
+	return {
+	    restrict: 'EA',
+	    replace: true,
+	    transclude: true,
+	    require: '^?accordion',
+	    scope: { title: '=expanderTitle' },
+	    template: '<div>' +
+		'<div class="title" ng-click="toggle()">{{title}}</div>' +
+		'<div class="body" ng-show="showMe" ng-transclude></div>' +
+		'</div>',
+	    link: function(scope, element, attrs, accordionController) {
+		scope.showMe = false;
+		accordionController.addExpander(scope);
+
+		scope.toggle = function toggle() {
+		    scope.showMe = !scope.showMe;
+		    accordionController.gotOpened(scope);
+		}
+	    }
+	}
+    });
+
+   function SomeController($scope) {
+       $scope.expanders = [
+	   {title: 'Click me to expand',
+	    text: 'Hi there folks, I am the content that was hidden but is now shown.'},
+	   {title: 'Click this',
+	    text: 'I am even better text than you have seen previously'},
+	   {title: 'No, click me!',
+	    text: 'I am text that should be seen before seeing other texts'}
+       ];
+    }
+
+  </script>
+</html>
