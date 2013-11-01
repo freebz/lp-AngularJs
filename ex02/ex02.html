@@ -1,0 +1,38 @@
+<html>
+<head>
+  <script
+     src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js">
+  </script>
+  <script type="text/javascript">
+    function ParentCtrl($scope) {
+	$scope.greet = "Hello";
+    }
+    
+    function MainCtrl($scope) {
+	angular.extend(this, new ParentCtrl($scope));
+	$scope.whoami = "Main Controller";
+    }
+
+    function NavCtrl($scope) {
+	angular.extend(this, new ParentCtrl($scope));
+	$scope.whoami = "Nav Controller";
+    }
+    
+    function SideCtrl($scope) {
+	angular.extend(this, new ParentCtrl($scope));
+	$scope.whoami = "Side Controller";
+    }
+  </script>
+</head>
+<body ng-app>
+  <div ng-controller="MainCtrl">
+    {{greet}}!! {{whoami}}
+  </div>
+  <div ng-controller="NavCtrl">
+    {{greet}}!! {{whoami}}
+  </div>
+  <div ng-controller="SideCtrl">
+    {{greet}}!! {{whoami}}
+  </div>
+</body>
+</html>
